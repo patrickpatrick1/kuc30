@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odliczanie do wyjątkowego dnia ❤️</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: Georgia, serif;
+  color: #fff0f5;
+  text-align: center;
+  background: linear-gradient(135deg,#230d20,#622b4b,#b56b83);
+}
+.container {
+  width: min(92%,650px);
+  padding: 35px 20px;
+  background: rgba(35,10,28,.48);
+  border: 1px solid rgba(255,220,235,.3);
+  border-radius: 28px;
+  box-shadow: 0 15px 60px #16071688;
+  backdrop-filter: blur(12px);
+  animation: appear 1.5s ease;
+}
+h1 { font-size: clamp(30px,6vw,48px); }
+.subtitle { color: #f5c6d9; font-size: 19px; }
+.timer {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 12px;
+  margin: 30px 0;
+}
+.unit {
+  background: #ffffff18;
+  border: 1px solid #ffffff25;
+  border-radius: 17px;
+  padding: 18px 5px;
+}
+.number { display:block; font-size: clamp(32px,7vw,48px); }
+.label { font-size: 12px; letter-spacing: 2px; color:#f5c6d9; }
+.heart { font-size: 30px; animation: pulse 1.5s infinite; }
+.footer { color:#edc1d2; font-size:15px; }
+@keyframes pulse {
+  50% { transform:scale(1.25); }
+}
+@keyframes appear {
+  from {opacity:0; transform:translateY(25px);}
+  to {opacity:1; transform:translateY(0);}
+}
+.petal {
+  position:fixed;
+  top:-30px;
+  color:#ffd0df;
+  opacity:.7;
+  pointer-events:none;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  to { transform:translateY(110vh) rotate(600deg); opacity:0; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="heart">♥</div>
+  <h1>Odliczanie do wyjątkowego dnia</h1>
+  <p class="subtitle">14 marca 2027</p>
+  <div class="timer" id="timer">
+    <div class="unit"><span class="number" id="weeks">0</span><span class="label">TYGODNI</span></div>
+    <div class="unit"><span class="number" id="days">0</span><span class="label">DNI</span></div>
+    <div class="unit"><span class="number" id="hours">0</span><span class="label">GODZIN</span></div>
+    <div class="unit"><span class="number" id="minutes">0</span><span class="label">MINUT</span></div>
+    <div class="unit"><span class="number" id="seconds">0</span><span class="label">SEKUND</span></div>
+    <div class="unit"><span class="number" id="months">0</span><span class="label">MIESIĘCY</span></div>
+  </div>
+  <p class="footer" id="message">Każda sekunda przybliża nas... ❤️</p>
+</div>
+<script>
+const target = new Date(2027, 2, 14, 0, 0, 0);
+
+function update() {
+  let diff = target - new Date();
+  if (diff <= 0) {
+    document.getElementById("timer").innerHTML =
+      "<h2>To już ten wyjątkowy dzień! ❤️</h2>";
+    document.getElementById("message").textContent =
+      "14 marca 2027";
+    return;
+  }
+
+  let totalSeconds = Math.floor(diff / 1000);
+  let totalDays = Math.floor(totalSeconds / 86400);
+  let months = Math.floor(totalDays / 30.436875);
+  let weeks = Math.floor(totalDays / 7);
+  let days = totalDays % 7;
+  let hours = Math.floor(totalSeconds / 3600) % 24;
+  let minutes = Math.floor(totalSeconds / 60) % 60;
+  let seconds = totalSeconds % 60;
+
+  document.getElementById("months").textContent = months;
+  document.getElementById("weeks").textContent = weeks;
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours;
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
+}
+update();
+setInterval(update, 1000);
+
+function petal() {
+  const el = document.createElement("div");
+  el.className = "petal";
+  el.textContent = Math.random() > .5 ? "♥" : "✿";
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.fontSize = (12 + Math.random()*15) + "px";
+  el.style.animationDuration = (5 + Math.random()*7) + "s";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 12000);
+}
+setInterval(petal, 500);
+</script>
+</body>
+</html>
