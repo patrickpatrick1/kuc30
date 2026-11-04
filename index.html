@@ -2,129 +2,276 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odliczanie do wyjątkowego dnia ❤️</title>
-<style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  font-family: Georgia, serif;
-  color: #fff0f5;
-  text-align: center;
-  background: linear-gradient(135deg,#230d20,#622b4b,#b56b83);
-}
-.container {
-  width: min(92%,650px);
-  padding: 35px 20px;
-  background: rgba(35,10,28,.48);
-  border: 1px solid rgba(255,220,235,.3);
-  border-radius: 28px;
-  box-shadow: 0 15px 60px #16071688;
-  backdrop-filter: blur(12px);
-  animation: appear 1.5s ease;
-}
-h1 { font-size: clamp(30px,6vw,48px); }
-.subtitle { color: #f5c6d9; font-size: 19px; }
-.timer {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 12px;
-  margin: 30px 0;
-}
-.unit {
-  background: #ffffff18;
-  border: 1px solid #ffffff25;
-  border-radius: 17px;
-  padding: 18px 5px;
-}
-.number { display:block; font-size: clamp(32px,7vw,48px); }
-.label { font-size: 12px; letter-spacing: 2px; color:#f5c6d9; }
-.heart { font-size: 30px; animation: pulse 1.5s infinite; }
-.footer { color:#edc1d2; font-size:15px; }
-@keyframes pulse {
-  50% { transform:scale(1.25); }
-}
-@keyframes appear {
-  from {opacity:0; transform:translateY(25px);}
-  to {opacity:1; transform:translateY(0);}
-}
-.petal {
-  position:fixed;
-  top:-30px;
-  color:#ffd0df;
-  opacity:.7;
-  pointer-events:none;
-  animation: fall linear forwards;
-}
-@keyframes fall {
-  to { transform:translateY(110vh) rotate(600deg); opacity:0; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcin – odliczanie do starości</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #171717;
+            background-color: #bdbdbb;
+            background-image:
+                radial-gradient(circle at 20% 30%, #999999 0.7px, transparent 1px),
+                radial-gradient(circle at 80% 70%, #888888 0.8px, transparent 1px),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 39px,
+                    rgba(0,0,0,0.08) 40px
+                );
+            background-size: 13px 13px, 19px 19px, 100% 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            text-align: center;
+            padding: 45px 25px;
+            background: rgba(220, 220, 218, 0.65);
+            border: 1px solid rgba(0,0,0,0.18);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+        }
+
+        .eyebrow {
+            font-size: 13px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #656565;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(27px, 5vw, 43px);
+            margin: 0 0 15px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: #555;
+            font-size: 17px;
+            margin-bottom: 35px;
+            font-style: italic;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 35px 0;
+        }
+
+        .unit {
+            padding: 20px 5px;
+            border-top: 2px solid #555;
+            border-bottom: 1px solid #999;
+        }
+
+        .number {
+            display: block;
+            font-size: clamp(27px, 5vw, 43px);
+            font-weight: 700;
+            letter-spacing: -2px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .label {
+            display: block;
+            margin-top: 10px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+        }
+
+        .separator {
+            height: 1px;
+            background: rgba(0,0,0,0.2);
+            margin: 35px 0;
+        }
+
+        .doom {
+            font-size: 21px;
+            font-weight: bold;
+            color: #383838;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .epitaph {
+            margin-top: 35px;
+            font-family: Georgia, serif;
+            font-size: 17px;
+            font-style: italic;
+            color: #666;
+        }
+
+        .tombstone {
+            font-size: 55px;
+            filter: grayscale(1);
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            margin-top: 35px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: #777;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 35px 12px;
+            }
+
+            .countdown {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5px;
+            }
+
+            .unit:last-child {
+                grid-column: span 2;
+            }
+
+            .number {
+                font-size: 35px;
+            }
+
+            h1 {
+                font-size: 29px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<div class="container">
-  <div class="heart">♥</div>
-  <h1>Odliczanie do wyjątkowego dnia</h1>
-  <p class="subtitle">14 marca 2027</p>
-  <div class="timer" id="timer">
-    <div class="unit"><span class="number" id="weeks">0</span><span class="label">TYGODNI</span></div>
-    <div class="unit"><span class="number" id="days">0</span><span class="label">DNI</span></div>
-    <div class="unit"><span class="number" id="hours">0</span><span class="label">GODZIN</span></div>
-    <div class="unit"><span class="number" id="minutes">0</span><span class="label">MINUT</span></div>
-    <div class="unit"><span class="number" id="seconds">0</span><span class="label">SEKUND</span></div>
-    <div class="unit"><span class="number" id="months">0</span><span class="label">MIESIĘCY</span></div>
-  </div>
-  <p class="footer" id="message">Każda sekunda przybliża nas... ❤️</p>
-</div>
-<script>
-const target = new Date(2027, 2, 14, 0, 0, 0);
 
-function update() {
-  let diff = target - new Date();
-  if (diff <= 0) {
-    document.getElementById("timer").innerHTML =
-      "<h2>To już ten wyjątkowy dzień! ❤️</h2>";
-    document.getElementById("message").textContent =
-      "14 marca 2027";
-    return;
-  }
+    <main class="container">
 
-  let totalSeconds = Math.floor(diff / 1000);
-  let totalDays = Math.floor(totalSeconds / 86400);
-  let months = Math.floor(totalDays / 30.436875);
-  let weeks = Math.floor(totalDays / 7);
-  let days = totalDays % 7;
-  let hours = Math.floor(totalSeconds / 3600) % 24;
-  let minutes = Math.floor(totalSeconds / 60) % 60;
-  let seconds = totalSeconds % 60;
+        <div class="eyebrow">
+            Raport nieuchronnego upływu czasu
+        </div>
 
-  document.getElementById("months").textContent = months;
-  document.getElementById("weeks").textContent = weeks;
-  document.getElementById("days").textContent = days;
-  document.getElementById("hours").textContent = hours;
-  document.getElementById("minutes").textContent = minutes;
-  document.getElementById("seconds").textContent = seconds;
-}
-update();
-setInterval(update, 1000);
+        <div class="tombstone">⚰️</div>
 
-function petal() {
-  const el = document.createElement("div");
-  el.className = "petal";
-  el.textContent = Math.random() > .5 ? "♥" : "✿";
-  el.style.left = Math.random() * 100 + "vw";
-  el.style.fontSize = (12 + Math.random()*15) + "px";
-  el.style.animationDuration = (5 + Math.random()*7) + "s";
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 12000);
-}
-setInterval(petal, 500);
-</script>
+        <h1>
+            Marcinie!<br>
+            Do twoich 30. urodzin pozostało:
+        </h1>
+
+        <div class="subtitle">
+            Ostatnie chwile młodości. Korzystaj, póki możesz.
+        </div>
+
+        <section class="countdown">
+
+            <div class="unit">
+                <span class="number" id="weeks">0</span>
+                <span class="label">Tygodnie</span>
+            </div>
+
+            <div class="unit">
+                <span class="number" id="days">0</span>
+                <span class="label">Dni</span>
+            </div>
+
+            <div class="unit">
+                <span class="number" id="hours">0</span>
+                <span class="label">Godziny</span>
+            </div>
+
+            <div class="unit">
+                <span class="number" id="minutes">0</span>
+                <span class="label">Minuty</span>
+            </div>
+
+            <div class="unit">
+                <span class="number" id="seconds">0</span>
+                <span class="label">Sekundy</span>
+            </div>
+
+        </section>
+
+        <div class="separator"></div>
+
+        <div class="doom">
+            Młodość odchodzi. Siwizna nadchodzi.
+        </div>
+
+        <div class="description">
+            Po przekroczeniu magicznej granicy 30 lat:<br>
+            – Plecy zaczynają boleć bez powodu.<br>
+            – Imprezy kończą się o 21:30.<br>
+            – Ulubionym napojem staje się woda niegazowana.<br>
+            – Coraz częściej będziesz mówił: „Za moich czasów...”.<br>
+            – Pierwsze siwe włosy przestają być przypadkiem.
+        </div>
+
+        <div class="epitaph">
+            „Nie umarł. Po prostu skończyło mu się 20 lat.”
+        </div>
+
+        <div class="footer">
+            05.03.2027 • Koniec pewnej epoki
+        </div>
+
+    </main>
+
+    <script>
+        // Data 30. urodzin Marcina
+        // Odliczanie do północy 5 marca 2027
+        const birthday = new Date(2027, 2, 5, 0, 0, 0);
+
+        function updateCountdown() {
+
+            const now = new Date();
+            let difference = birthday - now;
+
+            if (difference < 0) {
+                difference = 0;
+                document.querySelector("h1").innerHTML =
+                    "Marcinie!<br>Witaj w klubie trzydziestolatków.";
+                document.querySelector(".subtitle").textContent =
+                    "Młodość oficjalnie zakończona. Wyrazy współczucia.";
+            }
+
+            const totalSeconds = Math.floor(difference / 1000);
+
+            const weeks = Math.floor(totalSeconds / 604800);
+            const days = Math.floor(totalSeconds / 86400);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds;
+
+            document.getElementById("weeks").textContent = weeks;
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+        }
+
+        updateCountdown();
+
+        // Aktualizacja co sekundę
+        setInterval(updateCountdown, 1000);
+    </script>
+
 </body>
 </html>
